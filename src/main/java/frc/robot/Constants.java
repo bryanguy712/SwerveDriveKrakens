@@ -33,5 +33,12 @@ public final class Constants {
   public static final CANAddress SWERVE_TURN_RIGHT_REAR = new CANAddress(8);
   public static final CANAddress SWERVE_MODULE_ENCODER_RIGHT_REAR = new CANAddress(12);
 
+  public static final HIDPort JOYSTICK = new HIDPort(0);
+
+  public static final int MaxSpeed = 20;
+  public static final int MaxAngularRate = 20;
+  
+  public static record HIDPort(int hidport) {}
+
   public static record CANAddress(int address) {}
 }
