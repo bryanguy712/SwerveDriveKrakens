@@ -52,7 +52,8 @@ public class DriveSubsystem extends SubsystemBase{
 
     private static final SteerFeedbackType kSteerFeedbackType = SteerFeedbackType.FusedCANcoder;
 
-    private static final Current kSlipCurrent = Units.Amps.of(0);
+    //To do:
+    private static final Current kSlipCurrent = Units.Amps.of(30);
 
     private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
     private static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
@@ -60,12 +61,11 @@ public class DriveSubsystem extends SubsystemBase{
             new CurrentLimitsConfigs()
                 // Swerve azimuth does not require much torque output, so we can set a relatively low
                 // stator current limit to help avoid brownouts without impacting performance.
-                .withStatorCurrentLimit(Units.Amps.of(0))
+                .withStatorCurrentLimit(Units.Amps.of(20))
                 .withStatorCurrentLimitEnable(true)
         );
 
     private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
-    private static final Pigeon2Configuration pigeonConfigs = null;
 
     public static final CANBus kCANBus = new CANBus("canivore", "./logs/example.hoot");
 
@@ -77,13 +77,11 @@ public class DriveSubsystem extends SubsystemBase{
     //might be wrong, double check this!!!!
     private static final double kDriveGearRatio = 5.4;
     private static final double kSteerGearRatio = 12.1;
-    private static final Distance kWheelRadius = Units.Inches.of(2.167);
+    private static final Distance kWheelRadius = Units.Inches.of(2);
 
     //EDIT THIS!!!!!
     private static final boolean kInvertLeftSide = false;
     private static final boolean kInvertRightSide = false;
-
-    private static final int kPigeonId = 1;
 
     // These are only used for simulation, could need some changing
     private static final MomentOfInertia kSteerInertia = Units.KilogramSquareMeters.of(0.01);
@@ -93,9 +91,7 @@ public class DriveSubsystem extends SubsystemBase{
     private static final Voltage kDriveFrictionVoltage = Units.Volts.of(0.2);
 
     public static final SwerveDrivetrainConstants DrivetrainConstants = new SwerveDrivetrainConstants()
-            .withCANBusName(kCANBus.getName())
-            .withPigeon2Id(kPigeonId)
-            .withPigeon2Configs(pigeonConfigs);
+            .withCANBusName(kCANBus.getName());
 
     private static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> ConstantCreator =
         new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
