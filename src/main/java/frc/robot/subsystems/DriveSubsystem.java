@@ -19,6 +19,7 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerFeedbackType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -178,5 +179,43 @@ public class DriveSubsystem extends SubsystemBase{
 
     public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> rearRight = ConstantCreator.createModuleConstants(kRearRightSteerMotorId,
     kRearRightDriveMotorId, kRearRightEncoderId, kRearRightEncoderOffset, kRearRightXPos, kRearRightYPos, kInvertRightSide, kRearRightSteerMotorInverted, kRearRightEncoderInverted);
-    }    
+
+    public static final Distance SWERVE_WHEEL_OFFSET = Units.Inch.of(11.5);
+
+    public final SwerveDriveKinematics kinematics;
+    
+    public DriveSubsystem() {
+        
+        double offset_meters = SWERVE_WHEEL_OFFSET.in(Units.Meters);
+        Translation2d fl = new Translation2d(offset_meters, offset_meters);
+        Translation2d fr = new Translation2d(offset_meters, -offset_meters);
+        Translation2d rl = new Translation2d(-offset_meters, offset_meters);
+        Translation2d rr = new Translation2d(-offset_meters, -offset_meters);
+
+        this.kinematics = new SwerveDriveKinematics(fl, fr, rl, rr);
+
+        ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+            2.0, 2.0, Math.PI / 2.0, Rotation2d.fromDegrees(45.0));
+
+        SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
+        SwerveModuleState frontLeft = moduleStates[0];
+        SwerveModuleState frontRight = moduleStates[1];
+        SwerveModuleState rearLeft = moduleStates[2];
+        SwerveModuleState rearRight = moduleStates[3];
+
+        //Module Angle Optimization and Cosine compensation are not worked on yet.
+        
+        var frontLeftState = new SwerveModuleState(23.43, Rotation2d.fromDegrees(-140.19));
+        var frontRightState = new SwerveModuleState(23.43, Rotation2d.fromDegrees(-39.81));
+        var backLeftState = new SwerveModuleState(54.08, Rotation2d.fromDegrees(-109.44));
+        var backRightState = new SwerveModuleState(54.08, Rotation2d.fromDegrees(-70.56)); 
+        
+        ChassisSpeeds chassisSpeeds = kinematics.toChassisSpeeds(
+        frontLeftState, frontRightState, backLeftState, backRightState);
+        double forward = chassisSpeeds.vxMetersPerSecond;
+        double sideways = chassisSpeeds.vyMetersPerSecond;
+        double angular = chassisSpeeds.omegaRadiansPerSecond;
+    }
+
+}    
 
