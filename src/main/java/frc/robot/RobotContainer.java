@@ -14,11 +14,6 @@ public class RobotContainer {
     private final DriveSubsystem driveBase = new DriveSubsystem();
     private final XboxController driveController = new XboxController(Constants.XBOXCONTORLLER.hidport());
 
-    public RobotContainer() {
-        configureBindings();
-        driveBase.setDefaultCommand(driveFieldOrientedAngularVelocity);
-    }
-
     SwerveInputStream driveAngularVelocity = SwerveInputStream.of(
                     driveBase.getSwerveDrive(),
                     () -> driveController.getLeftY() * -1,
@@ -36,6 +31,11 @@ public class RobotContainer {
     Command driveFieldOrientedDirectAngle = driveBase.driveFieldOriented(driveDirectAngle);
 
     Command driveFieldOrientedAngularVelocity = driveBase.driveFieldOriented(driveAngularVelocity);
+
+    public RobotContainer() {
+        configureBindings();
+        driveBase.setDefaultCommand(driveFieldOrientedAngularVelocity);
+    }
 
     private void configureBindings() {}
 
