@@ -11,32 +11,35 @@ import swervelib.SwerveInputStream;
 
 public class RobotContainer {
 
-  private final DriveSubsystem driveBase = new DriveSubsystem();
-  private final XboxController driveController = new XboxController(Constants.XBOXCONTORLLER.hidport());
+    private final DriveSubsystem driveBase = new DriveSubsystem();
+    private final XboxController driveController = new XboxController(Constants.XBOXCONTORLLER.hidport());
 
-  public RobotContainer() {
-    configureBindings();
-    driveBase.setDefaultCommand(driveFieldOrientedAngularVelocity);
-  }
-    SwerveInputStream driveAngularVelocity = SwerveInputStream.of(driveBase.getSwerveDrive(), 
-      () -> driveController.getLeftY() * -1, 
-      () -> driveController.getLeftX() * -1)
-      .withControllerRotationAxis(driveController::getRightX)
-      .deadband(Constants.DEADBAND)
-      .scaleTranslation(0.8)
-      .allianceRelativeControl(true);
-    
-    SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driveController::getRightX, driveController::getRightY).headingWhile(true); 
+    public RobotContainer() {
+        configureBindings();
+        driveBase.setDefaultCommand(driveFieldOrientedAngularVelocity);
+    }
+
+    SwerveInputStream driveAngularVelocity = SwerveInputStream.of(
+                    driveBase.getSwerveDrive(),
+                    () -> driveController.getLeftY() * -1,
+                    () -> driveController.getLeftX() * -1)
+            .withControllerRotationAxis(driveController::getRightX)
+            .deadband(Constants.DEADBAND)
+            .scaleTranslation(0.8)
+            .allianceRelativeControl(true);
+
+    SwerveInputStream driveDirectAngle = driveAngularVelocity
+            .copy()
+            .withControllerHeadingAxis(driveController::getRightX, driveController::getRightY)
+            .headingWhile(true);
 
     Command driveFieldOrientedDirectAngle = driveBase.driveFieldOriented(driveDirectAngle);
 
     Command driveFieldOrientedAngularVelocity = driveBase.driveFieldOriented(driveAngularVelocity);
 
-  private void configureBindings() {
+    private void configureBindings() {}
 
-  }
-
-  public Command getAutonomousCommand() {
-    return null;
-  }
+    public Command getAutonomousCommand() {
+        return null;
+    }
 }

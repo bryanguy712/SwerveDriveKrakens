@@ -2,6 +2,4 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class DriveCommand extends Command {
-    
-}
+public class DriveCommand extends Command {}
