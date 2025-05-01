@@ -14,17 +14,6 @@ import java.util.Set;
 
 /** Robot preferences, accessible through Shuffleboard */
 public class MoPrefs {
-
-    public static final Pref<Double> turnP = unitlessDoublePref("turn P", 0);
-    public static final Pref<Double> turnI = unitlessDoublePref("turn I", 0);
-    public static final Pref<Double> turnD = unitlessDoublePref("turn D", 0);
-    public static final Pref<Double> turnIZone = unitlessDoublePref("turn IZone", 0);
-    public static final Pref<Double> moveP = unitlessDoublePref("move P", 0);
-    public static final Pref<Double> moveI = unitlessDoublePref("move I", 0);
-    public static final Pref<Double> moveD = unitlessDoublePref("move D", 0);
-    public static final Pref<Double> moveFF = unitlessDoublePref("move FF", 0);
-    public static final Pref<Double> moveIZone = unitlessDoublePref("move IZone", 0);
-
     public static final Pref<Double> driveMaxSpeedMPS = unitlessDoublePref("Drive Max Speed meterspersecond", 5);
     public static final Pref<Double> turnMaxSpeedRPS = unitlessDoublePref("Turn Max Speed radiansPerSecond", Math.PI);
 
