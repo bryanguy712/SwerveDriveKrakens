@@ -16,7 +16,7 @@ public class AutoAlign extends Command {
     private DriveSubsystem drive;
     private double tagID = 0;
 
-    public void AlignToReefTagRelative(boolean scoreRightSide, DriveSubsystem drive) {
+    public AutoAlign(boolean scoreRightSide, DriveSubsystem drive) {
         xPIDController = new PIDController(Constants.X_REEF_ALIGNMENT_P, 0.0, 0); // Vertical movement
         yPIDController = new PIDController(Constants.Y_REEF_ALIGNMENT_P, 0.0, 0); // Horitontal movement
         rotationPIDController = new PIDController(Constants.ROT_REEF_ALIGNMENT_P, 0, 0); // Rotation
