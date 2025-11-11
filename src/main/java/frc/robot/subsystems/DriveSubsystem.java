@@ -39,10 +39,6 @@ public class DriveSubsystem extends SubsystemBase {
         });
     }
 
-    public SwerveDrive getSwerveDrive() {
-        return swerveDrive;
-    }
-
     public void driveFieldOriented(ChassisSpeeds velocity) {
         swerveDrive.driveFieldOriented(velocity);
     }
@@ -55,5 +51,9 @@ public class DriveSubsystem extends SubsystemBase {
         return run(() -> {
             swerveDrive.driveFieldOriented(velocity.get());
         });
+    }
+
+    public SwerveDrive getSwerveDrive() {
+        return swerveDrive;
     }
 }
