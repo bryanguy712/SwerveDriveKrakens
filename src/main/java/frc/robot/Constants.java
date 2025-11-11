@@ -23,20 +23,20 @@ public final class Constants {
 
     public static record CANAddress(int address) {}
 
-    public static double X_REEF_ALIGNMENT_P = 0;
-    public static double Y_REEF_ALIGNMENT_P = 0;
-    public static double ROT_REEF_ALIGNMENT_P = 0;
+    public static double X_REEF_ALIGNMENT_P = 0.1;
+    public static double Y_REEF_ALIGNMENT_P = 0.1;
+    public static double ROT_REEF_ALIGNMENT_P = 0.1;
 
     public static double ROT_SETPOINT_REEF_ALIGNMENT = 0;
-    public static double ROT_TOLERANCE_REEF_ALIGNMENT = 0;
+    public static double ROT_TOLERANCE_REEF_ALIGNMENT = 1;
 
-    public static double X_SETPOINT_REEF_ALIGNMENT = 0;
-    public static double X_TOLERANCE_REEF_ALIGNMENT = 0;
+    public static double X_SETPOINT_REEF_ALIGNMENT = -0.34;
+    public static double X_TOLERANCE_REEF_ALIGNMENT = 0.02;
 
-    public static double Y_SETPOINT_REEF_ALIGNMENT = 0;
-    public static double Y_TOLERANCE_REEF_ALIGNMENT = 0;
+    public static double Y_SETPOINT_REEF_ALIGNMENT = 0.16;
+    public static double Y_TOLERANCE_REEF_ALIGNMENT = 0.02;
 
-    public static double DONT_SEE_TAG_WAIT_TIME = 0;
+    public static double DONT_SEE_TAG_WAIT_TIME = 1;
 
-    public static double POSE_VALIDATION_TIME = 0;
+    public static double POSE_VALIDATION_TIME = 0.3;
 }
