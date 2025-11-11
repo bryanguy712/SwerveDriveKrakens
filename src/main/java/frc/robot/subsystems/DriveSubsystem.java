@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,6 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     private final File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     private final SwerveDrive swerveDrive;
+
 
     public DriveSubsystem() {
         SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
@@ -53,7 +55,11 @@ public class DriveSubsystem extends SubsystemBase {
         });
     }
 
+    public void drive(Translation2d translation, double rotation, boolean fieldRelative) {
+        swerveDrive.drive(translation, rotation, fieldRelative, false);
+    }
+}
+
     public SwerveDrive getSwerveDrive() {
         return swerveDrive;
     }
-}
