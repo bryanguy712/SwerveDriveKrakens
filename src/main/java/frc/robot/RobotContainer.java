@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AutoAlign;
 import frc.robot.subsystems.DriveSubsystem;
@@ -36,21 +37,20 @@ public class RobotContainer {
     public RobotContainer() {
         configureBindings();
         driveBase.setDefaultCommand(driveFieldOrientedAngularVelocity);
-
-        while (driveController.getXButton()) {
-            new AutoAlign(false, driveBase).withTimeout(3);
-        }
-        while (driveController.getAButton()) {
-            new AutoAlign(true, driveBase).withTimeout(3);
-        }
     }
 
     private void configureBindings() {
         Trigger resetFieldOrientedFwd = new Trigger(() -> driveController.getBackButton());
         resetFieldOrientedFwd.onTrue(driveBase.resetFieldOrientedFwd());
+
+        Trigger autoAlignLeft = new Trigger(() -> driveController.getXButton());
+        autoAlignLeft.whileTrue(new AutoAlign(false, driveBase));
+
+        Trigger autoAlignRight = new Trigger(() -> driveController.getAButton());
+        autoAlignRight.whileTrue(new AutoAlign(true, driveBase));
     }
 
     public Command getAutonomousCommand() {
-        return null;
+        return Commands.print("no.");
     }
 }
