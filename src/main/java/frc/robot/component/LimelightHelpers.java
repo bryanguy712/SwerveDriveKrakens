@@ -1162,6 +1162,9 @@ public class LimelightHelpers {
         return getLimelightNTDoubleArray(limelightName, "tc");
     }
 
+    /**
+     * ID of the primary in-view AprilTag
+     */
     public static double getFiducialID(String limelightName) {
         return getLimelightNTDouble(limelightName, "tid");
     }
