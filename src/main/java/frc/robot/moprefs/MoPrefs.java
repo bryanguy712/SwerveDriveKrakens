@@ -17,6 +17,20 @@ public class MoPrefs {
     public static final Pref<Double> driveMaxSpeedMPS = unitlessDoublePref("Drive Max Speed meterspersecond", 5);
     public static final Pref<Double> turnMaxSpeedRPS = unitlessDoublePref("Turn Max Speed radiansPerSecond", Math.PI);
 
+    public static final Pref<Double> autoAlignXP = unitlessDoublePref("Auto Align X P", 0);
+    public static final Pref<Double> autoAlignYP = unitlessDoublePref("Auto Align Y P", 0);
+    public static final Pref<Double> autoAlignRoationP = unitlessDoublePref("Auto Align Rotation P", 0);
+
+    public static final Pref<Double> autoAlignXSetPoint = unitlessDoublePref("Auto Align X Setpoint", 0);
+    public static final Pref<Double> autoAlignYSetpoint = unitlessDoublePref("Auto Align Y Setpoint", 0);
+    public static final Pref<Double> autoAlignRotSetpoint = unitlessDoublePref("Auto Align Rotation Setpoint", 0);
+
+    public static final Pref<Double> autoAlignXTolerance = unitlessDoublePref("Auto Align X Tolerance", 0);
+    public static final Pref<Double> autoAlignYTolerance = unitlessDoublePref("Auto Align Y Tolerance", 0);
+    public static final Pref<Double> autoAlignRotTolerance = unitlessDoublePref("Auto Align Rotation Tolerance", 0);
+
+    public static final Pref<Double> autoAlignMaxSpeed = unitlessDoublePref("Auto Align Max Speed", 0);
+
     NetworkTable backingTable;
 
     private static MoPrefs instance;
